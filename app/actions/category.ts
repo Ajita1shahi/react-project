@@ -1,6 +1,6 @@
 export interface CategoryType {
     id: number;
-    title: string; // Changed from `name` to `title` to match UI
+    title: string; 
 }
 
 export async function getCategories(): Promise<CategoryType[]> {

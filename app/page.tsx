@@ -1,8 +1,5 @@
 "use client";
 
-import Image from "next/image";
-import NavBar from "./components/nav-bar";
-import Banner from "./components/banner";
 import TabButton from "./components/tab-btn";
 import PostCard from "./components/post-card";
 import { useEffect, useState } from "react";
@@ -24,6 +21,8 @@ interface PostType{
 
 export default function Home() {
   const [categories, setCategories] = useState<CategoryType[]>([]);
+
+  const [token, setToken] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -53,15 +52,33 @@ export default function Home() {
     fetchPosts();
   }, []);
 
+  useEffect(() => {
+    setToken(localStorage.getItem('authToken'));
+  }, []);
+
   return (
     <div className="px-10 py-5 flex flex-col gap-10">
-      {/* Tab Group */}
-      <div className="flex flex-row gap-10 justify-center">
-        <TabButton key={0} title="All"/>
+      <div className="flex flex-row justify-between">
+        {/* Tab Group */}
+        <div className="flex flex-row gap-10 justify-center">
+          <TabButton key={0} title="All"/>
 
-        {categories.map(category => (
-          <TabButton key={category.id} title={category.title}/>
-        ))}
+          {categories.map(category => (
+            <TabButton key={category.id} title={category.title}/>
+          ))}
+        </div>
+
+        <div>
+          {token == null ? (
+            <a
+              href="/login"
+              className="px-7 py-2 text-sm bg-amber-200 text-black rounded-md">
+              Login
+            </a>
+          ): `
+            logout
+          `}
+        </div>
       </div>
 
       {/* Posts */}

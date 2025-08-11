@@ -1,35 +1,36 @@
-interface PostType {
-    id: number;
-    title: string;
-    content: string;
-    category_id: number;
-    image: string;
+interface PostType{
+    id: number
+    title: string
+    content: string
+    category_id: number
+    image: string
 }
 
 const PostCard = ({post}: {post: PostType}) => {
     return (
-        <div className="border border-black/20 rounded-md p-5">
+        <div className="border border-amber-200/20 rounded-md p-5">
             <img
                 src={post.image}
                 className="w-full h-[200px] object-cover rounded-md"
                 alt=""
             />
             <h2 className="mt-2 text-xl font-semibold">
-                {post.title} 
-            </h2>   
+                {post.title}
+            </h2>
+
             <p className="mt-2 line-clamp-3">
                 {post.content}
             </p>
+
             <div className="text-right mt-2">
                 <a
-                   href=""
-                   className="px-7 py-2 text-sm bg-amber-200 text-black rounded-md">
-                   View Full
-
+                    href={`/post/${post.id}`}
+                    className="px-7 py-2 text-sm bg-amber-200 text-black rounded-md">
+                    View Full
                 </a>
-            </div>    
+            </div>
         </div>
     );
 }
-
+ 
 export default PostCard;
